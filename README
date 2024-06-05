@@ -14,3 +14,9 @@ Test data for the following targets: C, JSON, Javascript, SQL, XML, YAML, text f
 |JSON   |        |
 |C      |        |
 
+
+
+| First Header  | Second Header |
+| ------------- | ------------- |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |
