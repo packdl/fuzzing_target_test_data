@@ -1,0 +1,3 @@
+[submodule "test files/yaml/libyaml"]
+	path = test files/yaml/libyaml
+	url = https://github.com/yaml/libyaml/
