@@ -1,8 +1,8 @@
 # Fuzzing target test data
 
 Test data for the following targets: 
-1. [Python](https://github.com/packdl/fuzzing_target_test_data/tree/main/test%20files/python#readme)
-2. PHP
+1. [Python](test%20files/python#readme)
+2. [PHP](/test%20files/php/README.md)
 3. Text files
 4. YAML
 5. XML
