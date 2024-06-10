@@ -5,7 +5,7 @@ Test data for the following targets:
 2. [PHP](/test%20files/php/README.md)
 3. Text files
 4. [YAML](/test%20files/yaml/README.md)
-5. XML
+5. [XML](/test%20files/xml/README.md)
 6. [SQL](/test%20files/sql/README.md)
 7. Javascript
 8. JSON
