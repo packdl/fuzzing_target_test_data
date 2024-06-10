@@ -8,5 +8,5 @@ Test data for the following targets:
 5. [XML](/test%20files/xml/README.md)
 6. [SQL](/test%20files/sql/README.md)
 7. Javascript
-8. JSON
+8. [JSON](/test%20files/json/README.md)
 9. [C](/test%20files/c/README.md)

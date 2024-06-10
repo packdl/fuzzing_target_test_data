@@ -1,3 +1,6 @@
 [submodule "test files/yaml/libyaml"]
 	path = test files/yaml/libyaml
 	url = https://github.com/yaml/libyaml/
+[submodule "test files/json/JSON-Schema-Test-Suite"]
+	path = test files/json/JSON-Schema-Test-Suite
+	url = git@github.com:json-schema-org/JSON-Schema-Test-Suite.git

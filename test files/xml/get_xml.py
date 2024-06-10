@@ -30,7 +30,7 @@ def get_files(new_location, max_size=1024, max_num_files=10, ext=None):
                 continue
             potential_files.append(FILE_)
     
-    potential_files = sorted(potential_files, key=lambda x: os.stat(x).st_size)
+    potential_files = list(set(sorted(potential_files, key=lambda x: os.stat(x).st_size)))
     for x in potential_files:
         print(str(os.stat(x).st_size) +f' {x}')
 
