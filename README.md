@@ -7,6 +7,6 @@ Test data for the following targets:
 4. [YAML](/test%20files/yaml/README.md)
 5. [XML](/test%20files/xml/README.md)
 6. [SQL](/test%20files/sql/README.md)
-7. Javascript
+7. [Javascript](/test%20files/js/README.md)
 8. [JSON](/test%20files/json/README.md)
 9. [C](/test%20files/c/README.md)
