@@ -20,8 +20,8 @@ formal_name = {
     "python": "Python",
     "sql": "SQL",
     "txt": "text",
-    "xml": "xml",
-    "yaml": "yaml",
+    "xml": "XML",
+    "yaml": "YAML",
 }
 
 
