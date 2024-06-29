@@ -2,12 +2,15 @@ from string import Template
 from pathlib import Path
 from collections import namedtuple
 
-from prompt_templates import text_ss, text_fs, code_ss, code_fs
+from pandas import DataFrame
+
+from prompt_templates import text_ss, text_fs, code_ss, code_fs, code_pc, text_pc
 
 errors = [
     "",
     " The example should include a syntax error.",
     " The example should include a semantic error.",
+    " The example should include a common error for this format.",
 ]
 formal_name = {
     "c": "C",
@@ -92,33 +95,57 @@ Format = namedtuple(
 formats = []
 for f_name in formal_name:
     if f_name in ["c", "js", "php", "python", "sql"]:
-        formats.append(Format(
-        formal_name[f_name],
-        comment_symbol=symbols[f_name],
-        testfiles=get_examples(f_name),
-        prompt_templates=(code_ss, code_fs),
-    ))
+        formats.append(
+            Format(
+                formal_name[f_name],
+                comment_symbol=symbols[f_name],
+                testfiles=get_examples(f_name),
+                prompt_templates=(code_ss, code_fs, code_pc),
+            )
+        )
     else:
-        formats.append(Format(
-        formal_name[f_name],
-        comment_symbol=symbols[f_name],
-        testfiles=get_examples(f_name),
-        prompt_templates=(text_ss, text_fs),
-    ))
+        formats.append(
+            Format(
+                formal_name[f_name],
+                comment_symbol=symbols[f_name],
+                testfiles=get_examples(f_name),
+                prompt_templates=(text_ss, text_fs, text_pc),
+            )
+        )
 
 from pprint import pp
 
-def create_prompts(input_fmt:Format, error_list:list):
+
+def create_prompts(input_fmt: Format, error_list: list):
     # pp(input_fmt)
     name, cmt_sbl, file_text_list, templates = input_fmt
-    
+
     prompt_list = []
     for tid, template in enumerate(templates):
-        t=Template(template=template)
+        t = Template(template=template)
         for eid, error_val in enumerate(error_list):
-            substituted = t.substitute(code=name, example1=file_text_list[0], example2=file_text_list[1], comment=cmt_sbl, error=error_val )
-            prompt_list.append((f'{name}:template{tid}:error{eid}', substituted) )
-            prompt_list.append((f'{name}:template{tid}:error{eid}:pc', substituted, 'Without explanatory text use the example generated above to create another example.'))
+            substituted = t.substitute(
+                code=name,
+                example1=file_text_list[0],
+                example2=file_text_list[1],
+                comment=cmt_sbl,
+                error=error_val,
+            )
+            if tid == 2:
+                prompt_list.append(
+                    (f"{name}:template{tid}:error{eid}",)
+                    + tuple(substituted.splitlines())
+                )
+            else:
+                prompt_list.append((f"{name}:template{tid}:error{eid}", substituted))
+                prompt_list.append(
+                    (
+                        f"{name}:template{tid}:error{eid}:pc",
+                        substituted,
+                        "Without explanatory text use the example generated above to create another example.",
+                    )
+                )
+
     return prompt_list
 
 
@@ -127,5 +154,9 @@ for a_format in formats:
     prompts.extend(create_prompts(a_format, errors))
 
 from pprint import pp
+
 pp(prompts)
 pp(len(prompts))
+
+prompt_df = DataFrame(prompts, columns=['id','prompt0','prompt1'])
+prompt_df.to_parquet('prompts.parquet')
