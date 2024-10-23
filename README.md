@@ -5,7 +5,7 @@ set of prompts to generate test data for each of the targets identified in the d
 ## Fuzzing target test data
 
 Test data for the following targets: 
-1. [Python](test%20files/python#readme)
+1. [Python](test%20files/python/README.md)
 2. [PHP](/test%20files/php/README.md)
 3. [Text files](/test%20files/txt/README.md)
 4. [YAML](/test%20files/yaml/README.md)
